@@ -1,0 +1,32 @@
+{
+    "navbar": {
+        "home": "Home",
+        "adminhome": "Admin Home",
+        "products": "Products",
+        "services": "Services",
+        "allOrders": "All Orders",
+        "myOrders": "My Orders",
+        "about": "About",
+        "contact": "Contact",
+        "login": "Login",
+        "logout": "Logout",
+        "profile": "Profile",
+        "searchPlaceholder": "Search products"
+    },
+    "home": {
+        "titlePart1": "Premium Electrical Solutions",
+        "titlePart2": "For Every Need",
+        "description": "Devikrupa Electricals brings you 25+ years of trusted service...",
+        "shopNow": "Shop Now",
+        "homeBanner": {
+            "titlePart1": "Premium Electrical Solutions",
+            "titlePart2": "For Every Need",
+            "description": "Devikrupa Electricals brings you 25+ years of trusted service with top-quality products, expert advice, and competitive prices. Power your projects with reliability.",
+            "shopNow": "Shop Now",
+            "learnMore": "Learn More"
+        },
+        "categories": {
+            "title": "Categories"
+        }
+    }
+}

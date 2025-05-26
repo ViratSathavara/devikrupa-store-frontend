@@ -1,0 +1,286 @@
+@import "tailwindcss";
+@theme {
+    /* Color Definitions */
+    --color-background: #e7e8d1b5;
+    --color-button: #B85042;
+    --color-text: #B85042;
+    --color-button-text: #ffce09;
+    --color-nav-background: #ffce09;
+    /* Font Size Scale */
+    --text-1: 1px;
+    --text-2: 2px;
+    --text-3: 3px;
+    --text-4: 4px;
+    --text-5: 5px;
+    --text-6: 6px;
+    --text-7: 7px;
+    --text-8: 8px;
+    --text-9: 9px;
+    --text-10: 10px;
+    --text-11: 11px;
+    --text-12: 12px;
+    --text-13: 13px;
+    --text-14: 14px;
+    --text-18: 18px;
+    --text-20: 20px;
+    --text-24: 24px;
+    --text-28: 28px;
+    --text-32: 32px;
+    --text-36: 36px;
+    --text-40: 40px;
+    --text-44: 44px;
+    --text-48: 48px;
+    --text-52: 52px;
+    --text-56: 56px;
+    --text-60: 60px;
+    --text-64: 64px;
+    --text-68: 68px;
+    --text-72: 72px;
+    --text-76: 76px;
+    --text-80: 80px;
+    --text-84: 84px;
+    --text-88: 88px;
+    --text-92: 92px;
+    --text-96: 96px;
+    --text-100: 100px;
+    --text-120: 120px;
+    --text-140: 140px;
+    --text-160: 160px;
+    --text-180: 180px;
+    --text-200: 200px;
+    --text-240: 240px;
+    --text-280: 280px;
+    --text-320: 320px;
+    --text-360: 360px;
+    --text-400: 400px;
+    --text-440: 440px;
+    --text-480: 480px;
+    --text-520: 520px;
+    --text-560: 560px;
+    --text-600: 600px;
+    --text-640: 640px;
+    --text-680: 680px;
+    --text-720: 720px;
+    --text-740: 740px;
+    --text-2xl: 42rem;
+    --text-3xl: 56rem;
+    --text-4xl: 72rem;
+    /* Width Scale */
+    --width-1: 1px;
+    --width-2: 2px;
+    --width-3: 3px;
+    --width-4: 4px;
+    --width-5: 5px;
+    --width-6: 6px;
+    --width-7: 7px;
+    --width-8: 8px;
+    --width-9: 9px;
+    --width-10: 10px;
+    --width-11: 11px;
+    --width-12: 12px;
+    --width-13: 13px;
+    --width-14: 14px;
+    --width-18: 18px;
+    --width-20: 20px;
+    --width-24: 24px;
+    --width-28: 28px;
+    --width-32: 32px;
+    --width-36: 36px;
+    --width-40: 40px;
+    --width-44: 44px;
+    --width-48: 48px;
+    --width-52: 52px;
+    --width-56: 56px;
+    --width-60: 60px;
+    --width-64: 64px;
+    --width-68: 68px;
+    --width-72: 72px;
+    --width-76: 76px;
+    --width-80: 80px;
+    --width-84: 84px;
+    --width-88: 88px;
+    --width-92: 92px;
+    --width-96: 96px;
+    --width-100: 100px;
+    --width-120: 120px;
+    --width-124: 124px;
+    --width-140: 140px;
+    --width-160: 160px;
+    --width-180: 180px;
+    --width-200: 200px;
+    --width-240: 240px;
+    --width-280: 280px;
+    --width-320: 320px;
+    --width-360: 360px;
+    --width-400: 400px;
+    --width-440: 440px;
+    --width-480: 480px;
+    --width-520: 520px;
+    --width-560: 560px;
+    --width-600: 600px;
+    --width-640: 640px;
+    --width-680: 680px;
+    --width-720: 720px;
+    --width-740: 740px;
+    --width-2xl: 42rem;
+    --width-3xl: 56rem;
+    --width-4xl: 72rem;
+    /* Height Scale */
+    --height-1: 1px;
+    --height-2: 2px;
+    --height-3: 3px;
+    --height-4: 4px;
+    --height-5: 5px;
+    --height-6: 6px;
+    --height-7: 7px;
+    --height-8: 8px;
+    --height-9: 9px;
+    --height-10: 10px;
+    --height-11: 11px;
+    --height-12: 12px;
+    --height-13: 13px;
+    --height-14: 14px;
+    --height-18: 18px;
+    --height-20: 20px;
+    --height-24: 24px;
+    --height-28: 28px;
+    --height-32: 32px;
+    --height-36: 36px;
+    --height-40: 40px;
+    --height-44: 44px;
+    --height-48: 48px;
+    --height-52: 52px;
+    --height-56: 56px;
+    --height-60: 60px;
+    --height-64: 64px;
+    --height-68: 68px;
+    --height-72: 72px;
+    --height-76: 76px;
+    --height-80: 80px;
+    --height-84: 84px;
+    --height-88: 88px;
+    --height-92: 92px;
+    --height-96: 96px;
+    --height-100: 100px;
+    --height-120: 120px;
+    --height-140: 140px;
+    --height-160: 160px;
+    --height-180: 180px;
+    --height-200: 200px;
+    --height-240: 240px;
+    --height-280: 280px;
+    --height-320: 320px;
+    --height-360: 360px;
+    --height-400: 400px;
+    --height-440: 440px;
+    --height-480: 480px;
+    --height-520: 520px;
+    --height-560: 560px;
+    --height-600: 600px;
+    --height-640: 640px;
+    --height-680: 680px;
+    --height-720: 720px;
+    --height-740: 740px;
+    --height-2xl: 42rem;
+    --height-3xl: 56rem;
+    --height-4xl: 72rem;
+    /* Spacing Scale */
+    --space-1: 1px;
+    --space-2: 2px;
+    --space-3: 3px;
+    --space-4: 4px;
+    --space-5: 5px;
+    --space-6: 6px;
+    --space-7: 7px;
+    --space-8: 8px;
+    --space-9: 9px;
+    --space-10: 10px;
+    --space-11: 11px;
+    --space-12: 12px;
+    --space-13: 13px;
+    --space-14: 14px;
+    --space-18: 18px;
+    --space-20: 20px;
+    --space-24: 24px;
+    --space-28: 28px;
+    --space-32: 32px;
+    --space-36: 36px;
+    --space-40: 40px;
+    --space-44: 44px;
+    --space-48: 48px;
+    --space-52: 52px;
+    --space-56: 56px;
+    --space-60: 60px;
+    --space-64: 64px;
+    --space-68: 68px;
+    --space-72: 72px;
+    --space-76: 76px;
+    --space-80: 80px;
+    --space-84: 84px;
+    --space-88: 88px;
+    --space-92: 92px;
+    --space-96: 96px;
+    --space-100: 100px;
+    --space-120: 120px;
+    --space-140: 140px;
+    --space-160: 160px;
+    --space-180: 180px;
+    --space-200: 200px;
+    --space-240: 240px;
+    --space-280: 280px;
+    --space-320: 320px;
+    --space-360: 360px;
+    --space-400: 400px;
+    --space-440: 440px;
+    --space-480: 480px;
+    --space-520: 520px;
+    --space-560: 560px;
+    --space-600: 600px;
+    --space-640: 640px;
+    --space-680: 680px;
+    --space-720: 720px;
+    --space-740: 740px;
+    --space-2xl: 42rem;
+    --space-3xl: 56rem;
+    --space-4xl: 72rem;
+    /* Border Width */
+    --border-1: 1px;
+    --border-2: 2px;
+    --border-3: 3px;
+    --border-4: 4px;
+    --border-5: 5px;
+    --border-6: 6px;
+    --border-7: 7px;
+    --border-8: 8px;
+}
+
+body {
+    background-color: #e7e8d1b5;
+}
+
+
+/* MUI Button Overrides */
+
+.MuiButton-contained {
+    background-color: var(--color-button) !important;
+    color: var(--color-button-text) !important;
+}
+
+.MuiButton-contained:hover {
+    background-color: color-mix(in srgb, var(--color-button), black 15%) !important;
+}
+
+.MuiButton-outlined {
+    border-color: var(--color-button) !important;
+    color: var(--color-button) !important;
+}
+
+.MuiButton-text {
+    color: var(--color-text) !important;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}
