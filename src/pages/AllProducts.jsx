@@ -1,11 +1,17 @@
-import React, { useContext, useEffect } from 'react'
+// src/pages/AllProducts.js
+import React, { useContext, useEffect } from 'react';
 import { ProductContext } from '../contexts/ProductContext';
+import { useCart } from '../contexts/CartContext';
 import { FiShoppingCart } from 'react-icons/fi';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import { getProducts } from '../APIs/ProductsAPI';
+import { useLocation } from 'react-router-dom';
 
 const AllProducts = () => {
-  const { product, setProduct, productsCount, setProductsCount } = useContext(ProductContext);
+  const { product, setProduct } = useContext(ProductContext);
+  const { addToCart, cart } = useCart();
+  const location = useLocation();
+  const productsFromState = location?.state?.products || [];
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -18,6 +24,7 @@ const AllProducts = () => {
     };
     fetchProducts();
   }, []);
+
   const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -35,26 +42,10 @@ const AllProducts = () => {
     return stars;
   };
 
-      const handleAddToCart = (productId) => {
-        setProductsCount(prev => ({
-            ...prev,
-            [productId]: (prev[productId] || 0) + 1
-        }));
-    };
-
-      const handleIncrement = (productId) => {
-        setProductsCount(prev => ({
-            ...prev,
-            [productId]: (prev[productId] || 0) + 1
-        }));
-    };
-
-    const handleDecrement = (productId) => {
-        setProductsCount(prev => ({
-            ...prev,
-            [productId]: Math.max((prev[productId] || 0) - 1, 0)
-        }));
-    };
+  const getCartQuantity = (productId) => {
+    const cartItem = cart.find(item => item.product.productId === productId);
+    return cartItem ? cartItem.quantity : 0;
+  };
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -77,10 +68,11 @@ const AllProducts = () => {
                   {renderStars(product.rating)}
                   <span className="ml-1 text-sm">{product.rating}/5</span>
                 </div>
+                <p className="font-bold text-lg">${product.price}</p>
               </div>
-              {!productsCount[product.productId] ? (
+              {getCartQuantity(product.productId) === 0 ? (
                 <button
-                  onClick={() => handleAddToCart(product.productId)}
+                  onClick={() => addToCart(product)}
                   className="mt-3 flex items-center justify-center w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
                 >
                   <FiShoppingCart className="mr-2" />
@@ -89,14 +81,14 @@ const AllProducts = () => {
               ) : (
                 <div className="mt-3 flex items-center justify-center w-full py-2 bg-blue-200 text-black rounded hover:bg-blue-300 transition">
                   <button
-                    onClick={() => handleDecrement(product.productId)}
+                    onClick={() => addToCart(product, -1)}
                     className="cursor-pointer text-lg px-3 h-full flex items-center"
                   >
                     -
                   </button>
-                  <span className="w-5 text-center">{productsCount[product.productId]}</span>
+                  <span className="w-5 text-center">{getCartQuantity(product.productId)}</span>
                   <button
-                    onClick={() => handleIncrement(product.productId)}
+                    onClick={() => addToCart(product, 1)}
                     className="cursor-pointer text-lg px-3 h-full flex items-center"
                   >
                     +
@@ -108,7 +100,7 @@ const AllProducts = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AllProducts
+export default AllProducts;

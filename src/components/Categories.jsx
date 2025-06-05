@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { getCategories } from '../APIs/CategoryAPIs';
 import { t } from 'i18next';
 import { CategoryContext } from '../contexts/CategoryContext';
+import { getproductsByCategoryId } from '../APIs/ProductsAPI';
 
 const Categories = () => {
   const navigate = useNavigate();
@@ -29,11 +30,12 @@ const Categories = () => {
   }, []);
 
 
-  const handleCategoryClick = (category) => {
-    if (category.hasSubcategories) {
-      navigate(`/categories/${category._id}`);
-    } else {
-      navigate(`/products?category=${category._id}`);
+  const handleCategoryClick = async (category) => {
+    const response = await getproductsByCategoryId(category);
+    if (response.status === 200) {
+      navigate(`/products/${category?.categoryName}`, {
+        state: { products: response?.data?.products }
+      })
     }
   };
 
@@ -89,7 +91,7 @@ function hexToRgb(hex) {
         {Array.isArray(category?.data) && category?.count > 0 && category?.data?.map((category) => (
           <div
             key={category.categoryId}
-            // onClick={() => handleCategoryClick(category)}
+            onClick={() => handleCategoryClick(category)}
             className="px-2 cursor-pointer w-200 h-200"
           >
             <div

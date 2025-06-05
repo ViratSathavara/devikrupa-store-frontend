@@ -54,7 +54,7 @@ const HomeBanner = () => {
             <img 
               src={assets.HomeBanner} 
               alt="Electrical products"
-              className="w-full h-auto rounded-lg shadow-2xl transform hover:scale-105 transition-transform"
+              className="w-full h-auto rounded-lg shadow-20 transform hover:scale-105 transition-transform"
             />
           </div>
         </div>

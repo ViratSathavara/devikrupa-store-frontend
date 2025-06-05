@@ -11,3 +11,15 @@ export const getProducts = async () => {
         throw error;
     }
 };
+
+export const getproductsByCategoryId = async (categoryId) => {
+    try {
+        const response = await axios.get(`http://localhost:5000/products/category/${categoryId?.categoryName}`);
+        if (response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        console.error('API Error:', error.response?.data || error.message);
+        throw error;
+    }
+};

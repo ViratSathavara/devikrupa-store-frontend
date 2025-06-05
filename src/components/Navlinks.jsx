@@ -37,6 +37,57 @@ const NavLinks = () => {
                     {t('navbar.home')}
                 </Link>
             }
+            {token && role === 'admin' && (
+                <>
+                    <Link
+                        to="/adminproducts"
+                        className="text-button font-semibold relative px-2 py-1 transition-all duration-300
+                hover:text-button
+                before:content-[''] before:absolute before:bottom-0 before:left-0 
+                before:w-0 before:h-0.5 before:bg-button before:transition-all before:duration-300
+                hover:before:w-full hover:font-bold
+                active:scale-95 active:text-button
+                aria-[current=page]:text-button aria-[current=page]:before:w-full"
+                    >
+                        {t('navbar.products')}
+                    </Link>
+                    <Link
+                        to="/categpories"
+                        className="text-button font-semibold relative px-2 py-1 transition-all duration-300
+                hover:text-button
+                before:content-[''] before:absolute before:bottom-0 before:left-0 
+                before:w-0 before:h-0.5 before:bg-button before:transition-all before:duration-300
+                hover:before:w-full hover:font-bold
+                active:scale-95 active:text-button
+                aria-[current=page]:text-button aria-[current=page]:before:w-full"
+                    >
+                        {t('navbar.categories')}
+                    </Link>
+                    <Link
+                        to="/users"
+                        className="text-button font-semibold relative px-2 py-1 transition-all duration-300
+                hover:text-button
+                before:content-[''] before:absolute before:bottom-0 before:left-0 
+                before:w-0 before:h-0.5 before:bg-button before:transition-all before:duration-300
+                hover:before:w-full hover:font-bold
+                active:scale-95 active:text-button
+                aria-[current=page]:text-button aria-[current=page]:before:w-full"
+                    >
+                        {t('navbar.users')}
+                    </Link>
+                    <Link
+                        to="/orders"
+                        className="text-button font-semibold relative px-2 py-1 transition-all duration-300
+                hover:text-button
+                before:content-[''] before:absolute before:bottom-0 before:left-0 
+                before:w-0 before:h-0.5 before:bg-button before:transition-all before:duration-300
+                hover:before:w-full hover:font-bold
+                active:scale-95 active:text-button
+                aria-[current=page]:text-button aria-[current=page]:before:w-full"
+                    >
+                        {t('navbar.orders')}
+                    </Link>
+                </>)}
             {role !== 'admin' && (
                 <Link
                     to="/products"

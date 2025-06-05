@@ -9,12 +9,14 @@ import i18n from './i18n'
 import { CategoryProvider } from './contexts/CategoryContext.jsx'
 import { ProductProvider } from './contexts/ProductContext.jsx'
 import { LoginProvider } from './contexts/LoginContext.jsx'
+import { CartProvider } from './contexts/CartContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <LoginProvider>
       <Toaster />
       <ProductProvider>
+        <CartProvider>
         <CategoryProvider>
           <I18nextProvider i18n={i18n}>
             <BrowserRouter>
@@ -22,6 +24,7 @@ createRoot(document.getElementById('root')).render(
             </BrowserRouter>
           </I18nextProvider>
         </CategoryProvider>
+        </CartProvider>
       </ProductProvider>
     </LoginProvider>
   </StrictMode>,

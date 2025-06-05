@@ -28,10 +28,16 @@ const handleAuthSuccess = (token, userData) => {
         setRole(userRole);
     };
 
+    const handleNewUserDataAuthSuccess = (userData) => {
+        localStorage.setItem('user', JSON.stringify(userData));
+        setUser(userData);
+    };
+
     return (
         <LoginContext.Provider value={{
             token, user, role,setUser, setToken, setRole,
             handleAuthSuccess,
+            handleNewUserDataAuthSuccess,
             showUserLogin, setShowUserLogin
         }}>
             {children}

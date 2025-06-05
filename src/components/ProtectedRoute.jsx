@@ -12,7 +12,6 @@ const ProtectedRoute = ({ allowedRoles }) => {
   }
 
   if (!allowedRoles.includes(role)) {
-    // Redirect based on the current role
     return <Navigate to={role === 'admin' ? '/adminhome' : '/'} replace />;
   }
 

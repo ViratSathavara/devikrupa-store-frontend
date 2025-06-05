@@ -6,10 +6,11 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import { getProducts } from '../APIs/ProductsAPI';
 import { ProductContext } from '../contexts/ProductContext';
+import { useCart } from '../contexts/CartContext';
 
 const BestSellers = () => {
-    const { product, setProduct, productsCount, setProductsCount } = useContext(ProductContext);
-
+    const { product, setProduct, setProductsCount } = useContext(ProductContext);
+    const { addToCart, cart } = useCart();
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -74,6 +75,11 @@ const BestSellers = () => {
         ]
     };
 
+    const getCartQuantity = (productId) => {
+        const cartItem = cart.find(item => item.product.productId === productId);
+        return cartItem ? cartItem.quantity : 0;
+    };
+
     const renderStars = (rating) => {
         const stars = [];
         const fullStars = Math.floor(rating);
@@ -126,9 +132,9 @@ const BestSellers = () => {
                 </div> */}
                             </div>
 
-                            {!productsCount[product.productId] ? (
+                            {getCartQuantity(product.productId) === 0 ? (
                                 <button
-                                    onClick={() => handleAddToCart(product.productId)}
+                                    onClick={() => addToCart(product)}
                                     className="mt-3 flex items-center justify-center w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
                                 >
                                     <FiShoppingCart className="mr-2" />
@@ -137,14 +143,14 @@ const BestSellers = () => {
                             ) : (
                                 <div className="mt-3 flex items-center justify-center w-full py-2 bg-blue-200 text-black rounded hover:bg-blue-300 transition">
                                     <button
-                                        onClick={() => handleDecrement(product.productId)}
+                                        onClick={() => addToCart(product, -1)}
                                         className="cursor-pointer text-lg px-3 h-full flex items-center"
                                     >
                                         -
                                     </button>
-                                    <span className="w-5 text-center">{productsCount[product.productId]}</span>
+                                    <span className="w-5 text-center">{getCartQuantity(product.productId)}</span>
                                     <button
-                                        onClick={() => handleIncrement(product.productId)}
+                                        onClick={() => addToCart(product, 1)}
                                         className="cursor-pointer text-lg px-3 h-full flex items-center"
                                     >
                                         +

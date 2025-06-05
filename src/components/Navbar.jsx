@@ -9,13 +9,23 @@ import { t } from "i18next";
 import { LoginContext } from "../contexts/LoginContext";
 import { logoutUser } from "../APIs/LoginAPIs";
 import history from "../../history";
+import { useCart } from "../contexts/CartContext";
 
 const Navbar = () => {
     const { token, user, setUser, setToken, setRole, setShowUserLogin } = useContext(LoginContext)
+    const {
+        cart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        totalItems,
+        totalPrice
+    } = useCart();
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const role = localStorage.getItem('role');
 
     const handleLogout = async () => {
         try {
@@ -27,7 +37,6 @@ const Navbar = () => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
                 localStorage.removeItem('role');
-
                 navigate('/');
             }
         } catch (error) {
@@ -55,10 +64,10 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-8">
                 <NavLinks />
 
-                <div className="relative cursor-pointer" onClick={() => navigate('/cart')}>
+                {role !== 'admin' && <div className="relative cursor-pointer" onClick={() => navigate('/cart')}>
                     <LocalGroceryStoreOutlinedIcon className="text-button" />
-                    <button className="absolute -top-2 -right-3 text-xs text-white bg-indigo-500 w-[18px] h-[18px] rounded-full">0</button>
-                </div>
+                    <button className="absolute -top-2 -right-3 text-xs text-white bg-indigo-500 w-[18px] h-[18px] rounded-full">{totalItems}</button>
+                </div>}
 
                 {/* <Button 
                     variant="outlined"
@@ -93,7 +102,7 @@ const Navbar = () => {
                         >
                             <img
                                 src={user?.image
-                                    ? `http://localhost:5000${user.image}`
+                                    ? `http://localhost:5000${user?.image}`
                                     : "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                                 }
                                 alt="Profile"

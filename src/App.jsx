@@ -13,14 +13,23 @@ import Contact from './pages/Contact';
 import Products from './pages/AllProducts';
 import Services from './pages/Services';
 import MyOrders from './pages/MyOrders';
-import AdminHome from './pages/AdminHome';
+import Cart from './pages/Cart';
+import AdminHome from './pages/AdminPages/AdminHome';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import NotFound from './components/NotFound';
+import PublicRoute from './components/PublicRoute';
 import { ToastContainer } from 'react-toastify';
+import SelectedCategoryProduct from './components/SelectedCastegoryProduct';
+import Payment from './pages/Payment';
+import AdminProducts from './pages/AdminPages/AdminProducts';
+import AdminCategories from './pages/AdminPages/AdminCategories';
+import AdminUsers from './pages/AdminPages/AdminUsers';
+import AdminOrders from './pages/AdminPages/AdminOrders';
+import AdminRestrictedRoute from './components/AdminRestrictedRoute';
 
-const hideFooterPaths = ['/login', '/signup', '/verifyOTP'];
+const hideFooterPaths = ['/login', '/signup', '/verifyOTP', '/profile'];
 
 function App() {
   const location = useLocation();
@@ -33,22 +42,46 @@ function App() {
 
       <main className="flex-grow">
         <Routes>
-          {/* Public routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          {/* User-only routes */}
-          <Route element={<ProtectedRoute allowedRoles={['user']} />}>
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/my-orders" element={<MyOrders />} />
+
+          <Route element={<AdminRestrictedRoute />}>
+            <Route path="/" element={<Home />} />
           </Route>
+
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <PublicRoute>
+                <Signup />
+              </PublicRoute>
+            }
+          />
+          {/* User-only routes */}
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/services" element={<Services />} />
+          <Route element={<ProtectedRoute allowedRoles={['user']} />}>
+            <Route path="/my-orders" element={<MyOrders />} />
+            <Route path="/payment" element={<Payment />} />
+          </Route>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/products/:categoryname" element={<SelectedCategoryProduct />} />
 
           {/* Admin-only routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="/adminhome" element={<AdminHome />} />
+            <Route path="/adminproducts" element={<AdminProducts />} />
+            <Route path="/categpories" element={<AdminCategories />} />
+            <Route path="/users" element={<AdminUsers />} />
+            <Route path="/orders" element={<AdminOrders />} />
           </Route>
 
           {/* Common protected route for both */}
@@ -59,7 +92,7 @@ function App() {
           {/* 404 Page for unmatched routes */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-          <ToastContainer position="top-right" autoClose={3000} />
+        <ToastContainer position="top-right" autoClose={3000} />
       </main>
 
       {shouldShowFooter && <Footer />}
