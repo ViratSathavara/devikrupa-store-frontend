@@ -50,13 +50,14 @@ const Signup = () => {
             }
 
             const result = await registerUser(formDataObj);
+            console.log('result', result)
             if (result?.status === 200) {
                 setRegistrationData(formDataObj);
                 toast.success(result?.message);
                 setOtpStep(true);
                 setResendTimer(30);
             } else {
-                setError(result?.message || 'Registration failed');
+                setError(result?.error);
             }
         } catch (error) {
             setError(error?.response?.data?.message || 'Registration failed');
@@ -84,7 +85,7 @@ const Signup = () => {
                 const userRole = result?.data?.user?.role;
                 toast.success('User Registration Successfully!');
                 if (userRole === "admin") {
-                    navigate('/adminhome');
+                    navigate('/admin/dashboard');
                 } else if (userRole === "user") {
                     navigate('/');
                 }

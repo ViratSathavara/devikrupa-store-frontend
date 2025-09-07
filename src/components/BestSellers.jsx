@@ -7,15 +7,16 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import { getProducts } from '../APIs/ProductsAPI';
 import { ProductContext } from '../contexts/ProductContext';
 import { useCart } from '../contexts/CartContext';
+import ImageWithFallback from './ImageWithFallback';
 
 const BestSellers = () => {
-    const { product, setProduct, setProductsCount } = useContext(ProductContext);
+    const { products, setProducts, setProductsCount } = useContext(ProductContext);
     const { addToCart, cart } = useCart();
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const response = await getProducts();
-                setProduct(response);
+                setProducts(response);
             } catch (error) {
                 console.error('Full error:', error);
             }
@@ -102,14 +103,18 @@ const BestSellers = () => {
             <h2 className="text-20 text-center font-bold mb-6">Best Sellers</h2>
 
             <Slider {...settings}>
-                {product.filter((item) => item.rating >= 4).map((product) => (
+                {products && products.filter((item) => item.rating >= 4).map((product) => (
                     <div key={product.id} className="px-2">
                         <div className={`bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-lg transition-all h-auto min-h-320 flex flex-col`}>
                             <div className="relative w-full" style={{ height: '100px' }}>
-                                <img
-                                    src={`http://localhost:5000${product.productImages[0]}`}
+                                <ImageWithFallback
+                                    src={product.productImages && product.productImages.length > 0 
+                                        ? `http://localhost:5000${product.productImages[0]}` 
+                                        : null
+                                    }
                                     alt={product.name}
                                     className="w-full h-full object-contain"
+                                    fallbackText="No Image"
                                 />
                             </div>
 

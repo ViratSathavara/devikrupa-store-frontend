@@ -14,7 +14,10 @@ import Products from './pages/AllProducts';
 import Services from './pages/Services';
 import MyOrders from './pages/MyOrders';
 import Cart from './pages/Cart';
-import AdminHome from './pages/AdminPages/AdminHome';
+import AdminDashboard from './pages/AdminPages/AdminDashboard';
+import AdminUsersEnhanced from './pages/AdminPages/AdminUsersEnhanced';
+import AdminCategoriesEnhanced from './pages/AdminPages/AdminCategoriesEnhanced';
+import AdminSearch from './pages/AdminPages/AdminSearch';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -28,6 +31,7 @@ import AdminCategories from './pages/AdminPages/AdminCategories';
 import AdminUsers from './pages/AdminPages/AdminUsers';
 import AdminOrders from './pages/AdminPages/AdminOrders';
 import AdminRestrictedRoute from './components/AdminRestrictedRoute';
+import AdminHome from './pages/AdminPages/AdminHome';
 
 const hideFooterPaths = ['/login', '/signup', '/verifyOTP', '/profile'];
 
@@ -77,10 +81,14 @@ function App() {
 
           {/* Admin-only routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-            <Route path="/adminhome" element={<AdminHome />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/dashboard-old" element={<AdminHome />} />
             <Route path="/adminproducts" element={<AdminProducts />} />
+            <Route path="/categories" element={<AdminCategoriesEnhanced />} />
             <Route path="/categpories" element={<AdminCategories />} />
-            <Route path="/users" element={<AdminUsers />} />
+            <Route path="/users" element={<AdminUsersEnhanced />} />
+            <Route path="/users-old" element={<AdminUsers />} />
+            <Route path="/admin/search" element={<AdminSearch />} />
             <Route path="/orders" element={<AdminOrders />} />
           </Route>
 

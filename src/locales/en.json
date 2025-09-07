@@ -1,7 +1,7 @@
 {
     "navbar": {
         "home": "Home",
-        "adminhome": "Admin Home",
+        "adminhome": "Dashboard",
         "products": "Products",
         "categories": "Categories",
         "users": "Users",

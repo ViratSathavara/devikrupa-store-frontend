@@ -38,7 +38,7 @@ const Login = ({ setShowUserLogin }) => {
                     handleAuthSuccess(result?.data?.token, result?.data?.user);
                     setShowUserLogin(false);
                     if (role === "admin") {
-                        navigate('/adminhome');
+                        navigate('/admin/dashboard');
                     }
                 }
             } catch (error) {
@@ -88,7 +88,7 @@ const Login = ({ setShowUserLogin }) => {
                 handleAuthSuccess(verifyResult?.data?.token, verifyResult?.data?.user);
                 setShowUserLogin(false);
                 if (role === "admin") {
-                    navigate('/adminhome');
+                    navigate('/admin/dashboard');
                 }
             }
         } catch (error) {

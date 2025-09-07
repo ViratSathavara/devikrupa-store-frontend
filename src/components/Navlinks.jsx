@@ -13,7 +13,7 @@ const NavLinks = () => {
         <>
             {token && role === 'admin' ?
                 <Link
-                    to="/adminhome"
+                    to="/admin/dashboard"
                     className="text-button font-semibold relative px-2 py-1 transition-all duration-300
                 hover:text-button
                 before:content-[''] before:absolute before:bottom-0 before:left-0 

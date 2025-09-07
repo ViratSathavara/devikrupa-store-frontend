@@ -6,6 +6,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import { getProducts } from '../APIs/ProductsAPI';
 import { useLocation } from 'react-router-dom';
+import ImageWithFallback from '../components/ImageWithFallback';
 
 const AllProducts = () => {
   const { product, setProduct } = useContext(ProductContext);
@@ -54,10 +55,14 @@ const AllProducts = () => {
           <div key={product.id} className="flex">
             <div className="bg-gray-200 p-4 rounded-lg shadow-md hover:shadow-lg transition-all flex flex-col w-full">
               <div className="relative w-full mb-3" style={{ height: '140px' }}>
-                <img
-                  src={`http://localhost:5000${product.productImages[0]}`}
+                <ImageWithFallback
+                  src={product.productImages && product.productImages.length > 0 
+                    ? `http://localhost:5000${product.productImages[0]}` 
+                    : null
+                  }
                   alt={product.name}
                   className="w-full h-full object-contain"
+                  fallbackText="No Image"
                 />
               </div>
               <div className="flex-grow">

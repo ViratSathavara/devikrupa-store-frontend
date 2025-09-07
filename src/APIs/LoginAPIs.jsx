@@ -1,32 +1,46 @@
-import axios from 'axios';
+import { apiPost } from '../config/axiosConfig';
 
 export const loginUser = async (userData) => {
-
     try {
-        const response = await axios.post('http://localhost:5000/auth/login', { userData });
-        if (response.status === 200) {
-            return response.data;
+        const result = await apiPost('/auth/login', { userData });
+        
+        if (result.success) {
+            return result.data;
+        } else {
+            return { 
+                error: result.error,
+                success: false 
+            };
         }
     } catch (error) {
-        return { error: error.response?.data?.message || error.message };
+        console.error('Login error:', error);
+        return { 
+            error: error.message || 'Login failed',
+            success: false 
+        };
     }
 };
 
 export const registerUser = async (userData) => {
     try {
-        const response = await axios.post('http://localhost:5000/auth/register', userData, {
+        const result = await apiPost('/auth/register', userData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         });
-        if (response.status === 200) {
-            return response.data;
+        
+        if (result.success) {
+            return result.data;
+        } else {
+            return {
+                error: result.error,
+                success: false
+            };
         }
     } catch (error) {
+        console.error('Registration error:', error);
         return {
-            error: error.response?.data?.message ||
-                error.response?.data?.error ||
-                error.message,
+            error: error.message || 'Registration failed',
             success: false
         };
     }
@@ -34,15 +48,20 @@ export const registerUser = async (userData) => {
 
 export const verifyOTP = async (otpData) => {
     try {
-        const response = await axios.post('http://localhost:5000/auth/verify-otp', otpData);
-        if (response.status === 201) {
-            return response.data;
+        const result = await apiPost('/auth/verify-otp', otpData);
+        
+        if (result.success) {
+            return result.data;
+        } else {
+            return {
+                error: result.error,
+                success: false
+            };
         }
     } catch (error) {
+        console.error('OTP verification error:', error);
         return {
-            error: error.response?.data?.message ||
-                error.response?.data?.error ||
-                error.message,
+            error: error.message || 'OTP verification failed',
             success: false
         };
     }
@@ -50,43 +69,46 @@ export const verifyOTP = async (otpData) => {
 
 export const resendOTP = async (email) => {
     try {
-        const response = await axios.post('http://localhost:5000/auth/resend-otp', { email });
-        if (response.status === 200) {
-            return response.data;
+        const result = await apiPost('/auth/resend-otp', { email });
+        
+        if (result.success) {
+            return result.data;
+        } else {
+            return {
+                error: result.error,
+                success: false
+            };
         }
     } catch (error) {
+        console.error('Resend OTP error:', error);
         return {
-            error: error.response?.data?.message ||
-                error.response?.data?.error ||
-                error.message,
+            error: error.message || 'Failed to resend OTP',
             success: false
         };
     }
 };
 
 export const logoutUser = async () => {
-    const token = localStorage.getItem('token');
     try {
-        const response = await axios.get('http://localhost:5000/auth/logout', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        if (response.status === 200) {
+        const result = await apiGet('/auth/logout');
+        
+        if (result.success) {
             localStorage.clear();
-            setToken(null);
-            setUser(null);
-            setRole(null);
             window.location.reload();
-            history.push('/login');
-
-            return response.data;
+            return result.data;
+        } else {
+            return {
+                error: result.error,
+                success: false
+            };
         }
     } catch (error) {
+        console.error('Logout error:', error);
+        // Clear local storage even if logout fails
+        localStorage.clear();
+        window.location.reload();
         return {
-            error: error.response?.data?.message ||
-                error.response?.data?.error ||
-                error.message,
+            error: error.message || 'Logout failed',
             success: false
         };
     }
